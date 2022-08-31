@@ -12,22 +12,22 @@ import matplotlib
 import matplotlib.pyplot as plt
 import plotly.express as px
 
-
-st.set_page_config(page_title='Graduate Admission',page_icon='🏫',layout="wide")
+st.set_page_config(page_title='Graduate Admission', page_icon='🏫', layout="wide")
 selected = option_menu(
-    menu_title = "Graduate Student Admission",
-    options = ["Home", "Dataset","Dashboard","Prediction", "Contact"],
-    icons=["house", "hdd-stack-fill","graph-up","mortarboard-fill","info-circle-fill"],
-    menu_icon = "cast",
-    default_index= 0,
+    menu_title="Graduate Student Admission",
+    options=["Home", "Dataset", "Dashboard", "Prediction", "Contact"],
+    icons=["house", "hdd-stack-fill", "graph-up", "mortarboard-fill", "info-circle-fill"],
+    menu_icon="cast",
+    default_index=0,
     orientation="horizontal",
-    styles = {
+    styles={
         "container": {"padding": "0!important", "background-color": "#a4f4f9"},
         "icon": {"color": "White", "font-size": "30px"},
         "nav-link": {"font-size": "30px", "text-align": "center", "margin": "0px", "--hover-color": "#E0FFFF"},
         "nav-link-selected": {"background-color": "#FA8072"}
     }
 )
+
 
 @st.cache
 def load_data():
@@ -37,6 +37,8 @@ def load_data():
     df['LOR'] = winsorize(df['LOR'], limits=(0.005, 0))
     df['Chance of Admit'] = winsorize(df['Chance of Admit'], limits=(0.005, 0))
     return df
+
+
 df = load_data()
 
 # df['Chance of Admit'].plot(kind='hist', color='salmon');
@@ -55,19 +57,22 @@ if selected == "Home":
     st.write(" ")
 
     st.markdown("### PROJECT OBJECTIVE")
-    st.write("**My university acceptance calculator can help you to find the probability of getting accepted into a particular university based on your profile, "
-             "and it is completely free. Enter your language scores and CGPA to see the predicted output."
-             " This output will give you a fair idea about your chance of being admitted to a particular university.**")
+    st.write(
+        "**My university acceptance calculator can help you to find the probability of getting accepted into a particular university based on your profile, "
+        "and it is completely free. Enter your language scores and CGPA to see the predicted output."
+        " This output will give you a fair idea about your chance of being admitted to a particular university.**")
 
 if selected == "Dataset":
     st.markdown("# Dataset Details")
     st.markdown("### Explanation of the different features and the output of the dataset")
     st.write("    ")
-    st.write(" **This dataset was built with the purpose of helping students in shortlisting universities with their profiles. "
-             "The predicted output gives them a fair idea about their chances for a particular university. We use the dataset "
-             "which is available in link below:**")
+    st.write(
+        " **This dataset was built with the purpose of helping students in shortlisting universities with their profiles. "
+        "The predicted output gives them a fair idea about their chances for a particular university. We use the dataset "
+        "which is available in link below:**")
     st.write(":point_right: [Dataset_link](https://www.kaggle.com/datasets/mohansacharya/graduate-admissions)")
-    st.write(" -------------------------------------------------------------------------------------------------------      ")
+    st.write(
+        " -------------------------------------------------------------------------------------------------------      ")
 
     st.markdown("### ATTRIBUTES OF DATASET")
     st.write("o	GRE Score (0 to 340)")
@@ -78,8 +83,9 @@ if selected == "Dataset":
     st.write("o	Undergraduate CGPA is the average of grade points obtained in all the subject (out of 10)")
     st.write("o	Chance of Admit (range from 0 to 1) --> dependent variable")
     st.write(" ")
-    st.write("The size of the dataset is 500 records and 8 columns and it contains several parameters which are considered "
-             "important during the application for Masters Programs.")
+    st.write(
+        "The size of the dataset is 500 records and 8 columns and it contains several parameters which are considered "
+        "important during the application for Masters Programs.")
 
     st.write("The table below shows a sample from our dataset :")
     st.table(df.head())
@@ -91,7 +97,8 @@ if selected == "Dashboard":
     st.write("    ")
     st.write("    ")
 
-    st.write( " -----------------------------------------------------------------------------------------------------------  ")
+    st.write(
+        " -----------------------------------------------------------------------------------------------------------  ")
     # -----------------------------------------------------------------------------------
     st.markdown("##### Chance of Admit based on CGPA and GRE Score as discriminator")
     fig = plt.figure(figsize=(22, 6))
@@ -100,42 +107,48 @@ if selected == "Dashboard":
     plt.show()
     st.pyplot(fig)
     # -------------------------------------------------------------------------------------
-    st.write( " -----------------------------------------------------------------------------------------------------------  ")
+    st.write(
+        " -----------------------------------------------------------------------------------------------------------  ")
     st.markdown("##### Chance of Admit based on CGPA and Research as discriminator")
     fig = plt.figure(figsize=(22, 6))
     plt.title('Chance of Admit based on CGPA and Research as discriminator')
     sns.scatterplot(df['CGPA'], df['Chance of Admit'], hue=df['Research'], s=200);
     st.pyplot(fig)
     # -------------------------------------------------------------------------------------
-    st.write( " -----------------------------------------------------------------------------------------------------------  ")
+    st.write(
+        " -----------------------------------------------------------------------------------------------------------  ")
     st.markdown("##### Chance of Admit based on CGPA and University Rating as discriminator")
     fig = plt.figure(figsize=(22, 6))
     plt.title('Chance of Admit based on CGPA and University Rating as discriminator')
     sns.scatterplot(df['CGPA'], df['Chance of Admit'], hue=df['University Rating'], s=200, palette="Set2");
     st.pyplot(fig)
     # -------------------------------------------------------------------------------------
-    st.write( " -----------------------------------------------------------------------------------------------------------  ")
+    st.write(
+        " -----------------------------------------------------------------------------------------------------------  ")
     st.markdown("##### Chance of Admit based on CGPA and SOP as discriminator")
     fig = plt.figure(figsize=(22, 6))
     plt.title('Chance of Admit based on CGPA and SOP as discriminator')
     sns.scatterplot(df['CGPA'], df['Chance of Admit'], hue=df['SOP'], s=200, palette="bright");
     st.pyplot(fig)
     # -------------------------------------------------------------------------------------
-    st.write( " -----------------------------------------------------------------------------------------------------------  ")
+    st.write(
+        " -----------------------------------------------------------------------------------------------------------  ")
     st.markdown("##### Chance of Admit based on CGPA and LOR as discriminator")
     fig = plt.figure(figsize=(22, 6))
     plt.title('Chance of Admit based on CGPA and LOR as discriminator')
     sns.scatterplot(df['CGPA'], df['Chance of Admit'], hue=df['LOR'], s=200, palette="bright");
     st.pyplot(fig)
     # -------------------------------------------------------------------------------------
-    st.write( " -----------------------------------------------------------------------------------------------------------  ")
+    st.write(
+        " -----------------------------------------------------------------------------------------------------------  ")
     st.markdown("##### Correlation Plot")
     fig = plt.figure(figsize=(10, 10))
     sns.heatmap(df.corr(), annot=True, linewidths=0.05, fmt='.2f', cmap="magma")
     plt.show()
     st.pyplot(fig)
     # -------------------------------------------------------------------------------------
-    st.write( " -----------------------------------------------------------------------------------------------------------  ")
+    st.write(
+        " -----------------------------------------------------------------------------------------------------------  ")
 
     # -------------------------------------------------------------------------------------
     st.markdown("##### Percentage of candidates with Research Experience and 'Chance of Admit'>75%")
@@ -149,7 +162,8 @@ if selected == "Dashboard":
             autopct='%1.1f%%', startangle=90, colors=colors, explode=explode);
     st.pyplot(fig)
     # -------------------------------------------------------------------------------------
-    st.write(" -----------------------------------------------------------------------------------------------------------  ")
+    st.write(
+        " -----------------------------------------------------------------------------------------------------------  ")
     st.markdown("##### Chance of Admit vs University Rating")
     fig = plt.figure(figsize=(12, 10))
     sns.pointplot(df['University Rating'], df['Chance of Admit'])
@@ -157,7 +171,8 @@ if selected == "Dashboard":
     plt.show()
     st.pyplot(fig)
     # -------------------------------------------------------------------------------------
-    st.write( " -----------------------------------------------------------------------------------------------------------  ")
+    st.write(
+        " -----------------------------------------------------------------------------------------------------------  ")
     st.markdown("##### University Rating (percentage wise)")
     colors = ['cyan', 'salmon', 'gold', 'orchid', 'orange']
     explode = [0.01, 0.01, 0.01, 0.01, 0.01]
@@ -168,11 +183,9 @@ if selected == "Dashboard":
     plt.show()
     st.pyplot(fig)
 
-    st.write( " -----------------------------------------------------------------------------------------------------------  ")
+    st.write(
+        " -----------------------------------------------------------------------------------------------------------  ")
     st.write(" ")
-
-
-
 
 if selected == "Prediction":
     # st.title("Graduate Student Admission")
@@ -186,20 +199,21 @@ if selected == "Prediction":
             "<h1 style='text-align: center;  color: Black;background-color:#E0FFFF'>Student Admission Prediction</h1>",
             unsafe_allow_html=True)
 
-#         st.markdown(
-#             "<h3 style='text-align: center; color: salmon ;'>Drop in The required Inputs and we will do  the rest.</h3>",
-#             unsafe_allow_html=True)
-#         st.markdown("<h4 style='text-align: center; color: White;'>This Project is by Jaisingh Chauhan</h4>",
-#                     unsafe_allow_html=True)
-        st.write("-------------------------------------------------------------------------------------------------------  ")
+        #         st.markdown(
+        #             "<h3 style='text-align: center; color: salmon ;'>Drop in The required Inputs and we will do  the rest.</h3>",
+        #             unsafe_allow_html=True)
+        #         st.markdown("<h4 style='text-align: center; color: White;'>This Project is by Jaisingh Chauhan</h4>",
+        #                     unsafe_allow_html=True)
+        st.write(
+            "-------------------------------------------------------------------------------------------------------  ")
 
-        cgpa = st.slider("Input Your CGPA", 0.0, 10.0, 9.0,0.01)
-        gre = st.slider("Input your GRE Score", 0, 340, 300,1)
-        toefl = st.slider("Input your TOEFL Score", 0, 120, 100,1)
-        research = st.slider("Do You have Research Experience (0 = NO, 1 = YES)", 0, 1, 1)
-        uni_rating = st.slider("Rating of the University you wish to get in on a Scale 1-5", 1, 5, 4,1)
-        SOP = st.slider("Rating of the SOP you Have", 1.0, 5.0, 4.0,0.5)
-        LOR = st.slider("Rating of the LOR you Have", 1.0, 5.0, 4.0,0.5)
+        gre = st.slider("GRE Score", 0, 340, 300, 1)
+        toefl = st.slider("TOEFL Score", 0, 120, 100, 1)
+        uni_rating = st.slider("Rating of the University (scale 1-5)", 1, 5, 4, 1)
+        SOP = st.slider("Rating of the SOP (Statement of Purpose)", 1.0, 5.0, 4.0, 0.5)
+        LOR = st.slider("Rating of the LOR (Letter of Recommendation)", 1.0, 5.0, 4.0, 0.5)
+        cgpa = st.slider("CGPA", 0.0, 10.0, 9.0, 0.01)
+        research = st.slider("Research Experience (0 = NO, 1 = YES)", 0, 1, 1)
 
         # inputs = [[gre, toefl, uni_rating, SOP, LOR, cgpa, research]]
 
@@ -207,13 +221,19 @@ if selected == "Prediction":
             # # result = model.predict(inputs)
             # result = round(model.predict(inputs[0]*100, 3))
             # # updated_res = result.flatten().astype(float)
-            st.success('Your chances of getting admission in postgraduate degree is {}%'.format(round(model.predict([[gre, toefl, uni_rating, SOP, LOR, cgpa, research]])[0]*100, 3)))
+            ## st.success('Your chances of getting admission in postgraduate degree is {}%'.format(round(model.predict([[gre, toefl, uni_rating, SOP, LOR, cgpa, research]])[0]*100, 3)))
+            ## Using if-else statement for -ve as 0% and more than 100 as 100%
+            res = round(model.predict([[gre, toefl, uni_rating, SOP, LOR, cgpa, research]])[0] * 100, 3)
+            if res < 0:
+                st.success('Your chances of getting admission in postgraduate degree is 00.000%')
+            elif res > 100:
+                st.success('Your chances of getting admission in postgraduate degree is 100.000%')
+            else:
+                return st.success('Your chances of getting admission in postgraduate degree is {}%'.format(res))
+
 
     if __name__ == '__main__':
         main()
-
-
-
 
 if selected == "Contact":
     st.title("Made by Jaisingh Chauhan")
@@ -221,9 +241,10 @@ if selected == "Contact":
     st.write("    ")
     st.write("    ")
 
-    st.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLisL3IUg3KKSYgIMikl5CTDhOKV8Hg5nljAvjwgHXtsYuB8r660fH2cQs0O_yqy4cqCc&usqp=CAU.png",width=50)
+    st.image(
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLisL3IUg3KKSYgIMikl5CTDhOKV8Hg5nljAvjwgHXtsYuB8r660fH2cQs0O_yqy4cqCc&usqp=CAU.png",
+        width=50)
     st.write(":point_right: [GitHub](https://github.com/Jaisingh-Chauhan)")
     st.write("    ")
     st.image("https://cdn3.iconfinder.com/data/icons/inficons/512/linkedin.png", width=50)
     st.write(":point_right: [Linkedin](https://www.linkedin.com/in/jaisingh-chauhan)")
-
