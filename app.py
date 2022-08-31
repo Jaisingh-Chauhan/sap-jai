@@ -95,7 +95,7 @@ if selected == "Dataset":
 if selected == "Dashboard":
     # st.set_page_config(page_title='Graduate Admission', page_icon='🏫')
     st.markdown("# Data Visualization")
-        st.write(" -------------------------------------------------------------------------------------------------- ")
+    st.write(" -------------------------------------------------------------------------------------------------- ")
     st.write(" -------------------------------------------------------------------------------------------------- ")
     st.markdown("##### Chance of Admit based on CGPA and GRE Score as discriminator")
     fig = plt.figure(figsize=(22, 6))
@@ -176,8 +176,7 @@ if selected == "Prediction":
         st.markdown(
             "<h1 style='text-align: center;  color: Black;background-color:#E0FFFF'>Student Admission Prediction</h1>",
             unsafe_allow_html=True)
-        st.write(
-            "-------------------------------------------------------------------------------------------------------  ")
+        st.write( "-------------------------------------------------------------------------------------------------  ")
         gre = st.slider("GRE Score", 0, 340, 300, 1)
         toefl = st.slider("TOEFL Score", 0, 120, 100, 1)
         uni_rating = st.slider("Rating of the University (scale 1-5)", 1, 5, 4, 1)
