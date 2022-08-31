@@ -6,19 +6,13 @@ from streamlit_option_menu import option_menu
 from scipy.stats.mstats import winsorize
 import seaborn as sns
 import matplotlib.pyplot as plt
-#import scipy.stats as stats
-
-#import time
-#import matplotlib
-
-#import plotly.express as px
 
 st.set_page_config(page_title='Graduate Admission', page_icon='🏫', layout="wide")
 selected = option_menu(
     menu_title="Graduate Student Admission",
     options=["Home", "Dataset", "Dashboard", "Prediction", "Contact"],
     icons=["house", "hdd-stack-fill", "graph-up", "mortarboard-fill", "info-circle-fill"],
-    menu_icon=":school:",
+    menu_icon="person",
     default_index=0,
     orientation="horizontal",
     styles={
