@@ -31,7 +31,7 @@ selected = option_menu(
 
 @st.cache
 def load_data():
-    df = pd.read_csv('\Dataset\Admission_Predict_Ver1.1.csv')
+    df = pd.read_csv('https://raw.githubusercontent.com/Jaisingh-Chauhan/sap-jai/main/Dataset/Admission_Predict_Ver1.1.csv')
     df.columns = df.columns.str.strip()
     df.set_index('Serial No.', inplace=True)
     df['LOR'] = winsorize(df['LOR'], limits=(0.005, 0))
